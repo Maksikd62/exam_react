@@ -7,10 +7,10 @@ import {
     MenuItem,
     Typography,
     Avatar,
+    IconButton,
 } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import { btnPageStyle } from "./style";
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { Link, useNavigate } from "react-router-dom";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
@@ -28,9 +28,12 @@ const Navbar = () => {
     const { theme } = useSelector((state) => state.themingReducer);
     const { logout, setTheme } = useAction();
     const navigate = useNavigate();
+    const isAuthSuccess = localStorage.getItem("isAuthSuccess")
 
     const logoutHandler = () => {
         handleCloseUserMenu();
+        localStorage.removeItem("user");
+        localStorage.removeItem("isAuthSuccess");
         logout();
         navigate("signin");
     };
@@ -51,13 +54,10 @@ const Navbar = () => {
 
     useEffect(() => {
         const themeLocal = localStorage.getItem("theme");
-        if (themeLocal != null) {
-            if (themeLocal != "light") {
-                setTheme(themeLocal);
-            }
+        if (themeLocal != null && themeLocal !== theme) {
+            setTheme(themeLocal);
         }
-    }, []);
-    
+    }, [theme, setTheme]);
 
     return (
         <AppBar position="static">
@@ -68,7 +68,9 @@ const Navbar = () => {
                     </IconButton>
                     {pages.map((page) => (
                         <Link key={page.id} to={page.url}>
-                            <Button sx={btnPageStyle}>{page.title}</Button>
+                            <Button sx={{ color: theme === "light" ? "black" : "white" }}>
+                                {page.title}
+                            </Button>
                         </Link>
                     ))}
                 </Grid>
@@ -76,13 +78,13 @@ const Navbar = () => {
                     <IconButton onClick={changeTheme} color="inherit" sx={{ marginRight: 2 }}>
                         {theme === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
                     </IconButton>
-                    {!isAuth ? (
+                    {!isAuthSuccess ? (
                         <>
                             <Link to="/signin">
-                                <Button sx={{ color: "black" }}>Увійти</Button>
+                                <Button sx={{ color: theme === "light" ? "black" : "white" }}>Увійти</Button>
                             </Link>
                             <Link to="/signup">
-                                <Button sx={{ color: "black" }}>Зареєструватися</Button>
+                                <Button sx={{ color: theme === "light" ? "black" : "white" }}>Зареєструватися</Button>
                             </Link>
                         </>
                     ) : (
@@ -91,7 +93,13 @@ const Navbar = () => {
                                 sx={{ p: 0, mr: 2 }}
                                 onClick={handleOpenUserMenu}
                             >
-                                <Avatar alt="Avatar" src={user.picture} />
+                                {isAuth ? (
+                                    <Avatar alt="Avatar" src={user.picture} />
+                                ) : (
+                                    <Avatar>
+                                        <AccountBoxIcon />
+                                    </Avatar>
+                                )}
                             </IconButton>
                             <Menu
                                 sx={{ mt: "45px" }}
@@ -110,12 +118,12 @@ const Navbar = () => {
                                 onClose={handleCloseUserMenu}
                             >
                                 <MenuItem onClick={handleCloseUserMenu}>
-                                    <Link to="/add-ad">
+                                    <Link to="/addCar">
                                         <Typography textAlign="center">Додати оголошення</Typography>
                                     </Link>
                                 </MenuItem>
                                 <MenuItem onClick={handleCloseUserMenu}>
-                                    <Link to="/my-ads">
+                                    <Link to="/myCars">
                                         <Typography textAlign="center">Мої оголошення</Typography>
                                     </Link>
                                 </MenuItem>
