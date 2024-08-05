@@ -10,7 +10,7 @@ import {
     IconButton,
 } from "@mui/material";
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import AccountBoxIcon from '@mui/icons-material/AccountCircle';
 import { Link, useNavigate } from "react-router-dom";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";

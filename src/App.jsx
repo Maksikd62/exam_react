@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Navbar from "./components/navbar/navbar";
 
 import { ThemeProvider } from "@mui/material/styles";
 import lightTheme from "./theming/lightTheme";
@@ -12,6 +11,8 @@ import { Routes, Route } from "react-router-dom";
 import DefaulLayout from "./components/layouts/default/DefaultLayout";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useAction } from "./hooks/useAction";
+
+import MainPage from "./pages/main/MainPage";
 
 import "./App.css";
 
@@ -36,6 +37,7 @@ function App() {
       <GoogleOAuthProvider clientId={clientId}>
         <Routes>
           <Route path="/" element={<DefaulLayout />}>
+            <Route index element={<MainPage />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
           </Route>
