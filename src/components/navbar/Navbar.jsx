@@ -123,7 +123,7 @@ const Navbar = () => {
                                     </Link>
                                 </MenuItem>
                                 <MenuItem onClick={handleCloseUserMenu}>
-                                    <Link to="/myCars">
+                                    <Link to="/allMyCars">
                                         <Typography textAlign="center">Мої оголошення</Typography>
                                     </Link>
                                 </MenuItem>

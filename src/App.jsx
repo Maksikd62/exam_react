@@ -14,6 +14,9 @@ import { useAction } from "./hooks/useAction";
 
 import MainPage from "./pages/main/MainPage";
 
+import AddCar from "./pages/cars/AddCar";
+import AllMyCars from "./pages/cars/AllCars";
+
 import "./App.css";
 
 function App() {
@@ -40,6 +43,8 @@ function App() {
             <Route index element={<MainPage />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/addCar" element={<AddCar />} />
+            <Route path="/allMyCars" element={<AllMyCars />} />
           </Route>
         </Routes>
       </GoogleOAuthProvider>
