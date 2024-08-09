@@ -158,7 +158,7 @@ const MainPage = () => {
                           {car.location} - {car.datePublication}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                          {car.mileage}
+                          {car.mileage} тис.км
                         </Typography>
                       </CardContent>
                     </CardActionArea>
@@ -221,7 +221,7 @@ const MainPage = () => {
                             label: "Розмитнена",
                             value: selectedCar.customsCleared,
                           },
-                          { label: "Пробіг", value: selectedCar.mileage },
+                          { label: "Пробіг", value: `${selectedCar.mileage} тис.км` },
                           { label: "Вид палива", value: selectedCar.fuelType },
                           {
                             label: "Об'єм двигуна",

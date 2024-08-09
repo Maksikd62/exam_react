@@ -4,7 +4,6 @@ import {
   Button,
   Checkbox,
   FormControl,
-  FormControlLabel,
   InputLabel,
   MenuItem,
   Select,
@@ -67,16 +66,16 @@ const CarFilters = ({ cars, applyFilters }) => {
     },
   });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    formik.setFieldValue(name, value);
-  };
-
   const filteredModels = formik.values.selectedBrand
     ? cars
         .filter((car) => car.brand === formik.values.selectedBrand)
         .map((car) => car.model)
     : models;
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    formik.setFieldValue(name, value);
+  };
 
   return (
     <Box sx={{ p: 2, border: "1px solid", borderRadius: 1 }}>
